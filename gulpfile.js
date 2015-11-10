@@ -45,7 +45,7 @@ gulp.task('fonts', [], function () {
 gulp.task('js', function () {
     return gulp.src(paths.js)
         .pipe(concat('app.min.js'))
-        .pipe(babel())
+        .pipe(babel({"presets": ["es2015"]}))
         //.pipe(uglify())
         .pipe(gulp.dest(paths.build + 'js/'));
 });

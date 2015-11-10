@@ -1,12 +1,16 @@
 {
   "name": "autocomplete",
   "version": "0.0.1",
+  "license": "MIT",
   "description": "autocomplete plugin for power users",
+  "repository": "https://github.com/guillaumevincent/autocomplete.git",
   "main": "app/main.js",
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "karma start karma.conf.js",
+    "postinstall": "node_modules/.bin/gulp build"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.1.2",
     "chai": "^3.4.1",
     "del": "^2.0.2",
     "gulp": "^3.9.0",

@@ -10,9 +10,5 @@ describe('autocomplete', function () {
         var autocomplete = new AutoComplete([{}, {}]);
         assert.equal(2, autocomplete.workers.length);
     });
-
-    it('should get worker', function () {
-
-    })
 });
 
