@@ -3,9 +3,9 @@ class AutoComplete {
         this._minions = minions;
     }
 
-    help(question = '') {
+    help(input = '') {
         var answers = [];
-        this._get_minions(question).forEach(function (minion) {
+        this._get_minions(input).forEach(function (minion) {
             minion.mine().forEach(function (answer) {
                 answers.push(answer)
             });
@@ -13,9 +13,9 @@ class AutoComplete {
         return answers;
     }
 
-    _get_minions(filter = '') {
+    _get_minions(input = '') {
         return this._minions.filter(function (minion) {
-            return filter.indexOf(minion.trigger) > -1
+            return input.indexOf(minion.trigger) > -1
         })
     }
 }
