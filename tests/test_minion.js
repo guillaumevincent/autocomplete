@@ -2,12 +2,18 @@ var assert = chai.assert;
 
 describe('minions', function () {
     it('should have a trigger', function () {
-        var minion = new Minion('#');
+        var minion = new Minion();
         assert.isDefined(minion.trigger);
     });
-    it('should have a mine method', function () {
-        var minion = new Minion();
-        assert.isDefined(minion.mine());
+    describe('mine', function () {
+        it('should be defined', function () {
+            var minion = new Minion();
+            assert.isDefined(minion.mine());
+        });
+        it('should return an array', function () {
+            var minion = new Minion();
+            assert(Array.isArray(minion.mine()));
+        });
     });
 });
 

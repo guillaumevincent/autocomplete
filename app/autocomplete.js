@@ -5,7 +5,7 @@ class AutoComplete {
 
     help(input = '') {
         var answers = [];
-        this._get_minions(input).forEach(function (minion) {
+        this._getMinions(input).forEach(function (minion) {
             minion.mine().forEach(function (answer) {
                 answers.push(answer)
             });
@@ -13,7 +13,7 @@ class AutoComplete {
         return answers;
     }
 
-    _get_minions(input = '') {
+    _getMinions(input = '') {
         return this._minions.filter(function (minion) {
             return input.indexOf(minion.trigger) > -1
         })
