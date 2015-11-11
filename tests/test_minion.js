@@ -15,5 +15,11 @@ describe('minions', function () {
             assert(Array.isArray(minion.mine()));
         });
     });
+    describe('minion range', function () {
+        it('should be a minion', function () {
+            var minionDate = new MinionRange();
+            assert.equal('Minion', Object.getPrototypeOf(minionDate.constructor).name);
+        });
+    });
 });
 

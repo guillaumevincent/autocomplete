@@ -19,13 +19,3 @@ class AutoComplete {
         })
     }
 }
-
-class Minion {
-    constructor(trigger = '') {
-        this.trigger = trigger;
-    }
-
-    mine() {
-        return [];
-    }
-}
