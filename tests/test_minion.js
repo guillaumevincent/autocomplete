@@ -20,6 +20,27 @@ describe('minions', function () {
             var minionDate = new MinionRange();
             assert.equal('Minion', Object.getPrototypeOf(minionDate.constructor).name);
         });
+        it('should have default answers', function () {
+            var minion = new MinionRange();
+            assert.isDefined(minion._defaultAnswers);
+        });
+        it('could match an answer', function () {
+            var answer = {
+                'id': 'sameDay',
+                "text": 'today'
+            };
+            var todayMatch = 't_to_tod_toda_today'.split('_');
+            for (var i = 0; i < todayMatch.length; i++) {
+                assert.ok(MinionRange.match(todayMatch[i], answer));
+            }
+        });
+        it('could match an answer uppercase', function () {
+            var answer = {
+                'id': 'sameDay',
+                "text": 'today'
+            };
+            assert.ok(MinionRange.match('T', answer));
+        });
     });
 });
 
