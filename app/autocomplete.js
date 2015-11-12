@@ -6,16 +6,12 @@ class AutoComplete {
     help(input = '') {
         var answers = [];
         this._getMinions(input).forEach(function (minion) {
-            minion.mine().forEach(function (answer) {
-                answers.push(answer);
-            });
+            minion.mine().forEach(answer => answers.push(answer));
         });
         return answers;
     }
 
     _getMinions(input = '') {
-        return this._minions.filter(function (minion) {
-            return input.indexOf(minion.trigger) > -1;
-        })
+        return this._minions.filter(minion => minion.trigger && input.indexOf(minion.trigger) > -1)
     }
 }
