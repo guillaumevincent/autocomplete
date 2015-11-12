@@ -19,18 +19,16 @@ class MinionRange extends Minion {
         ];
     }
 
-    mine(input) {
-        // answers = get_answers(input)
-        // anwsers = translate_answers(answers)
-        // return answer_match(input)
-        return this._defaultAnswers
+    mine(input = '') {
+        const translatedAnswers = this.constructor._translate(this._defaultAnswers);
+        return translatedAnswers.filter(answer => this.constructor._match(input, answer));
     }
 
-    static match(input, answer) {
+    static _match(input, answer) {
         return answer.text.indexOf(input.toLowerCase()) > -1;
     }
 
-    static translate(answers, lang = 'en') {
+    static _translate(answers, lang = 'en') {
         var translations = {
             "en": {
                 "sameDay": "today",

@@ -31,7 +31,7 @@ describe('minions', function () {
             };
             var todayMatch = 't_to_tod_toda_today'.split('_');
             for (var i = 0; i < todayMatch.length; i++) {
-                assert.ok(MinionRange.match(todayMatch[i], answer));
+                assert.ok(MinionRange._match(todayMatch[i], answer));
             }
         });
         it('could match an answer uppercase', function () {
@@ -39,15 +39,21 @@ describe('minions', function () {
                 'id': 'sameDay',
                 'text': 'today'
             };
-            assert.ok(MinionRange.match('T', answer));
+            assert.ok(MinionRange._match('T', answer));
         });
         it('should translate answers', function () {
-            var answersTranslated = MinionRange.translate([{'id': 'sameDay'}]);
+            var answersTranslated = MinionRange._translate([{'id': 'sameDay'}]);
             assert.equal('today', answersTranslated[0].text)
         });
         it('should translate answers in french', function () {
-            var answersTranslated = MinionRange.translate([{'id': 'lastDay'}], 'fr');
+            var answersTranslated = MinionRange._translate([{'id': 'lastDay'}], 'fr');
             assert.equal('hier', answersTranslated[0].text)
+        });
+        it('should translate and filter answers', function () {
+            var minion = new MinionRange();
+            var answers = minion.mine('today');
+            assert.equal(1, answers.length);
+            assert.equal('sameDay', answers[0].id);
         });
     });
 });
