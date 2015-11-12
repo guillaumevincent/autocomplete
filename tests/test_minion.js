@@ -27,7 +27,7 @@ describe('minions', function () {
         it('could match an answer', function () {
             var answer = {
                 'id': 'sameDay',
-                "text": 'today'
+                'text': 'today'
             };
             var todayMatch = 't_to_tod_toda_today'.split('_');
             for (var i = 0; i < todayMatch.length; i++) {
@@ -37,9 +37,17 @@ describe('minions', function () {
         it('could match an answer uppercase', function () {
             var answer = {
                 'id': 'sameDay',
-                "text": 'today'
+                'text': 'today'
             };
             assert.ok(MinionRange.match('T', answer));
+        });
+        it('should translate answers', function () {
+            var answersTranslated = MinionRange.translate([{'id': 'sameDay'}]);
+            assert.equal('today', answersTranslated[0].text)
+        });
+        it('should translate answers in french', function () {
+            var answersTranslated = MinionRange.translate([{'id': 'lastDay'}], 'fr');
+            assert.equal('hier', answersTranslated[0].text)
         });
     });
 });
