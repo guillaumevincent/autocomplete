@@ -1,3 +1,5 @@
+'use strict';
+
 class Minion {
     constructor(trigger = '') {
         this.trigger = trigger;
@@ -7,6 +9,7 @@ class Minion {
         return [];
     }
 }
+
 
 class MinionRange extends Minion {
     constructor(trigger = '#') {
@@ -49,3 +52,8 @@ class MinionRange extends Minion {
         return answers;
     }
 }
+
+module.exports = {
+    Minion: Minion,
+    MinionRange: MinionRange
+};

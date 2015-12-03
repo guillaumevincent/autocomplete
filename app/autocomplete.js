@@ -1,4 +1,6 @@
-var fuzzysearch = require('fuzzysearch');
+'use strict';
+
+var _fuzzysearch = require('fuzzysearch');
 
 class AutoComplete {
     constructor(minions = []) {
@@ -18,6 +20,8 @@ class AutoComplete {
     }
 
     static fuzzysearch(input, text){
-        return fuzzysearch(text, input)
+        return _fuzzysearch(input, text)
     }
 }
+
+module.exports = AutoComplete;

@@ -1,4 +1,6 @@
-var assert = chai.assert;
+var assert = require('chai').assert;
+var AutoComplete = require('../app/autocomplete');
+var Minion = require('../app/minions').Minion;
 
 describe('autocomplete', function () {
     it('should have an array of answers', function () {

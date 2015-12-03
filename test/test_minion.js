@@ -1,11 +1,14 @@
-var assert = chai.assert;
+var assert = require('chai').assert;
+var AutoComplete = require('../app/autocomplete');
+var Minion = require('../app/minions').Minion;
+var MinionRange = require('../app/minions').MinionRange;
 
 describe('minions', function () {
     it('should have a trigger', function () {
         var minion = new Minion();
         assert.isDefined(minion.trigger);
     });
-    describe('mine', function () {
+    describe('minion mine', function () {
         it('should be defined', function () {
             var minion = new Minion();
             assert.isDefined(minion.mine());
@@ -16,10 +19,10 @@ describe('minions', function () {
         });
         it('should implement fuzzy search', function () {
             var text = 'la semaine dernière';
-        assert.ok(AutoComplete.fuzzysearch('sd', text));
+            assert.ok(AutoComplete.fuzzysearch('sd', text));
             assert.ok(AutoComplete.fuzzysearch('semaine d', text));
             assert.ok(AutoComplete.fuzzysearch('s d', text));
-            assert.ok(AutoComplete.fuzzysearch('ls d', text));
+            assert.ok(AutoComplete.fuzzysearch('car', 'cartwheel'));
         });
     });
     describe('minion range', function () {
