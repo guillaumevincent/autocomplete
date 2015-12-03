@@ -1,3 +1,5 @@
+var fuzzysearch = require('fuzzysearch');
+
 class AutoComplete {
     constructor(minions = []) {
         this._minions = minions;
@@ -13,5 +15,9 @@ class AutoComplete {
 
     _getMinions(input = '') {
         return this._minions.filter(minion => minion.trigger && input.indexOf(minion.trigger) > -1)
+    }
+
+    static fuzzysearch(input, text){
+        return fuzzysearch(text, input)
     }
 }

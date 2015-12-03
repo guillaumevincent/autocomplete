@@ -14,6 +14,13 @@ describe('minions', function () {
             var minion = new Minion();
             assert(Array.isArray(minion.mine()));
         });
+        it('should implement fuzzy search', function () {
+            var text = 'la semaine dernière';
+        assert.ok(AutoComplete.fuzzysearch('sd', text));
+            assert.ok(AutoComplete.fuzzysearch('semaine d', text));
+            assert.ok(AutoComplete.fuzzysearch('s d', text));
+            assert.ok(AutoComplete.fuzzysearch('ls d', text));
+        });
     });
     describe('minion range', function () {
         it('should be a minion', function () {

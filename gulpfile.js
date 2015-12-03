@@ -9,9 +9,17 @@ var jsonminify = require('gulp-jsonminify');
 var minifyHtml = require('gulp-minify-html');
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require('gulp-minify-css');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var mergeStream = require('merge-stream');
+var eventStream = require('event-stream');
+var streamify = require('gulp-streamify');
 
 var paths = {
     build: "dist/",
+    browserify: [
+        'node_modules/fuzzysearch/index.js'
+    ],
     js: [
         'app/**/*.js'
     ],
@@ -42,6 +50,35 @@ gulp.task('fonts', [], function () {
         .pipe(gulp.dest(paths.build + 'fonts/'));
 });
 
+gulp.task('js_vendors', function () {
+    var browserifyStream = browserify(paths.browserify)
+        .bundle()
+        .pipe(source('browserify.min.js'));
+
+    //.pipe(gulp.dest(paths.build + 'js/'));
+
+    var jsStream = gulp.src(paths.js_vendors);
+    //.pipe(concat('app.min.js'));
+    //.pipe(uglify())
+    //.pipe(gulp.dest(paths.build + 'js/'));
+
+
+    return mergeStream(browserifyStream, jsStream)
+        .pipe(streamify(concat('vendor.min.js')))
+        //.pipe(concat('app.min.js'))
+        .pipe(gulp.dest(paths.build + 'js/'));
+
+    //return merge(browserifyStream, jsStream);
+});
+
+gulp.task('b', ['clean'], function () {
+    return browserify(['app/**/*.js'])
+        .transform('babelify', {presets: ['es2015']})
+        .bundle()
+        .pipe(source('browserify.min.js'))
+        .pipe(gulp.dest(paths.build + 'js/'));
+});
+
 gulp.task('js', function () {
     return gulp.src(paths.js)
         .pipe(concat('app.min.js'))
@@ -61,11 +98,6 @@ gulp.task('locales', function () {
         .pipe(gulp.dest(paths.build + 'locales/'));
 });
 
-gulp.task('js_vendors', function () {
-    return gulp.src(paths.js_vendors)
-        .pipe(concat('vendors.min.js'))
-        .pipe(gulp.dest(paths.build + 'js/'));
-});
 
 gulp.task('html', function () {
     return gulp.src(paths.html)
